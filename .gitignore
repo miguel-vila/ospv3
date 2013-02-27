@@ -1,0 +1,27 @@
+*.class
+*.classpath
+*.project
+*.classpath
+*.project
+*.classpath
+*.project
+*.classpath
+*.project
+*.classpath
+*.project
+*.classpath
+*.project
+*.classpath
+*.project
+*.classpath
+*.project
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Folders #
+target/
+project/
+bin/
