@@ -16,7 +16,7 @@ public abstract class Entity< T extends EntityState > {
 	
 	public abstract State<T> currentState( );
 	
-	public EntityState entityState(){
+	public T entityState(){
 		return entityState;
 	}
 	
