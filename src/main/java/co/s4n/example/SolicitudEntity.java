@@ -16,31 +16,28 @@ import co.s4n.osp.Entity;
 import co.s4n.osp.EntityState;
 import co.s4n.osp.State;
 
-public class SolicitudEntity implements Entity< SolicitudEntity > {
+public class SolicitudEntity extends Entity< SolicitudState > {
 	
-	private EntityState entityState;
-	private Map< SolicitudStatesEnum, State< SolicitudState > > states = new EnumMap<>( SolicitudStatesEnum.class );
+	private Map< SolicitudStatesEnum, State<SolicitudState> > states = new EnumMap<>( SolicitudStatesEnum.class );
 	
 	public SolicitudEntity( Integer current, SolicitudDTO dto ) {
-		super( );
+		super( new SolicitudState( current, dto ) );
 		loadStates( );
-		this.entityState = new SolicitudState( current, dto ); 
 	}
 
-	public SolicitudEntity( EntityState entityState ) {
-		super( );
+	public SolicitudEntity( SolicitudState solicitudState ) {
+		super( solicitudState );
 		loadStates( );
-		this.entityState = entityState;
-	}
-
-	public SolicitudEntity next( ) {
-		State< SolicitudState > currentState = states.get( SolicitudStatesEnum.values( )[ entityState.current( ) ] );
-		EntityState newEntityState = currentState.apply( ( SolicitudState ) entityState );		
-		return new SolicitudEntity( newEntityState );
 	}
 	
-	public State<SolicitudState> currentState( ) {
+	@Override
+	public State< SolicitudState > currentState( ) {
 		return states.get( SolicitudStatesEnum.values( )[ entityState.current( ) ] );
+	}
+		
+	@Override
+	public Entity<SolicitudState> getEntity(SolicitudState entityState) {
+		return new SolicitudEntity(entityState);
 	}
 	
 	private void loadStates( )  {
@@ -51,4 +48,5 @@ public class SolicitudEntity implements Entity< SolicitudEntity > {
 		Injector injector = Guice.createInjector( new EventBusModule( ) );
 		states.put( SolicitudStatesEnum.EN_EVALUACION, injector.getInstance( EnEvaluacion.class ) );
 	}
+
 }
