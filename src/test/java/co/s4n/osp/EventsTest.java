@@ -29,7 +29,7 @@ public class EventsTest {
 	public void testSingletonEventBusInjection( ) {
 		Injector injector = Guice.createInjector( new EventBusModule( ) );
 		EnEvaluacion enEvaluacion = injector.getInstance( EnEvaluacion.class );
-		enEvaluacion.apply( new SolicitudState( SolicitudStatesEnum.EN_EVALUACION.ordinal( ), new SolicitudDTO( "13883", "03005108130207521205", "030", Boolean.TRUE ) ) );
+		enEvaluacion.getNextState( new SolicitudState( SolicitudStatesEnum.EN_EVALUACION.ordinal( ), new SolicitudDTO( "13883", "03005108130207521205", "030", Boolean.TRUE ) ) );
 	}
 
 }

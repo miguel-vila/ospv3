@@ -10,7 +10,7 @@ public abstract class Entity< T extends EntityState > {
 	
 	public Entity<T> next( ) {
 		State<T> currentState = currentState();
-		T newEntityState = currentState.apply( entityState );		
+		T newEntityState = currentState.getNextState( entityState );		
 		return getEntity( newEntityState );
 	}
 	
